@@ -61,6 +61,8 @@ Route::group([
 
       
         Route::resource('product', 'CatalogProductController');
+        
+        Route::resource('category', 'CatalogCategoryController');
       
         /*
         Route::controllers([

@@ -11,7 +11,7 @@
   {!! Form::open(['url' => 'page']) !!}
   
     
-    @include('admin.pages.form', ['submitButtonText' => 'Add Page']);
+    @include('admin.pages.form', ['submitButtonText' => 'Add Page'])
 
     
   {!! Form::close() !!}

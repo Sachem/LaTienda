@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\CatalogProductRequest;
 use App\Http\Controllers\Controller;
 use App\CatalogProduct;
 
@@ -31,14 +31,14 @@ class CatalogProductController extends Controller
      * @param CatalogProduct $product
      * @return type
      */
-    public function show(CatalogProduct $product)
+    /*public function show(CatalogProduct $product)
     {  
       return view('admin.catalog_product.show', compact('product'));
-    }
+    }*/
     
     /**
      * 
-     * @param CatalogProduct $product
+     * @param CatalogProduct $product // route model binding - check RouteServiceProvider@boot
      * @return type
      */
     public function edit(CatalogProduct $product)
@@ -55,7 +55,7 @@ class CatalogProductController extends Controller
     {  
       $product->update($request->all());
       
-      return redirect('admin/catalog_product/'.$product->id.'/edit')->with([
+      return redirect('admin/catalog/product/'.$product->id.'/edit')->with([
         'flash_message' => 'Product updated'
       ]);
     }
@@ -79,7 +79,7 @@ class CatalogProductController extends Controller
       
       $product->save();
       
-      return redirect('admin/catalog_product');
+      return redirect('admin/catalog/product');
     }
     
 

@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/lara1st/app/Page.php</file>
-            <file>file:/C:/wamp/www/lara1st/resources/views/pages/about.blade.php</file>
-            <file>file:/C:/wamp/www/lara1st/resources/views/pages/create.blade.php</file>
-            <file>file:/C:/wamp/www/lara1st/app/Http/routes.php</file>
-            <file>file:/C:/wamp/www/lara1st/app/Http/Controllers/PagesController.php</file>
-            <file>file:/C:/wamp/www/lara1st/resources/views/app.blade.php</file>
+            <file>file:/Users/ania/dev/LaTienda/app/Http/Controllers/Admin/CatalogProductController.php</file>
+            <file>file:/Users/ania/dev/LaTienda/resources/views/admin/catalog_product/form.blade.php</file>
+            <file>file:/Users/ania/dev/LaTienda/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/Users/ania/dev/LaTienda/resources/views/admin/catalog_product/edit.blade.php</file>
+            <file>file:/Users/ania/dev/LaTienda/app/Http/Controllers/Admin/CatalogCategoryController.php</file>
+            <file>file:/Users/ania/dev/LaTienda/app/Providers/RouteServiceProvider.php</file>
+            <file>file:/Users/ania/dev/LaTienda/resources/views/admin/catalog_category/edit.blade.php</file>
+            <file>file:/Users/ania/dev/LaTienda/resources/views/admin/catalog_category/form.blade.php</file>
+            <file>file:/Users/ania/dev/LaTienda/app/CatalogCategory.php</file>
+            <file>file:/Users/ania/dev/LaTienda/resources/views/admin/catalog_product/index.blade.php</file>
         </group>
     </open-files>
 </project-private>

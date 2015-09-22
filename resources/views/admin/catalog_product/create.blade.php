@@ -11,7 +11,7 @@
   {!! Form::open(['url' => 'admin/catalog/product']) !!}
   
     
-    @include('admin.catalog_product.form', ['submitButtonText' => 'Add Product']);
+    @include('admin.catalog_product.form', ['submitButtonText' => 'Add Product'])
 
     
   {!! Form::close() !!}
