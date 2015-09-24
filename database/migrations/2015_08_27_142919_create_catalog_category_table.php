@@ -18,7 +18,7 @@ class CreateCatalogCategoryTable extends Migration
 
         $table->increments('id');
 
-        $table->integer("parent_id")->unsigned()->nullable();$table->index("parent_id");
+        $table->integer("parent_id")->unsigned()->default(0);$table->index("parent_id");
         $table->string("name", 150)->default("")->nullable();
         $table->text("description")->nullable();
         $table->string("url", 150)->default("")->nullable();

@@ -5,7 +5,7 @@
   <h1>Products</h1>
   <ul>
     @foreach ($products as $product)
-    <li><a href='{{ url('/admin/catalog/product/'.$page->id.'/edit') }}'>{{ $product->name }}</a></li>
+    <li><a href='{{ url('/admin/catalog/product/'.$product->id.'/edit') }}'>{{ $product->name }}</a></li>
     @endforeach
   </ul>
 @stop
