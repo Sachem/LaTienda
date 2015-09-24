@@ -2,7 +2,7 @@
 
     @if(count($list['children']))
 
-    <a class="expand" data-children="{{ count($list['children']) }}">[+]</a>
+    <a class="expand" data-children="{{ count($list['children']) }}">[{{ $category_edit == true ? '-' : '+' }}]</a>
 
     @endif
 
@@ -10,7 +10,7 @@
 
     @if(count($list['children']))
 
-    <ul class="tree-node" style="display: none;">
+    <ul class="tree-node" style="display: {{ $category_edit == true ? 'block' : 'none' }};">
 
         @foreach($list['children'] as $child)
 
