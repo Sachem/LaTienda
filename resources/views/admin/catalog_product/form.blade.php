@@ -29,8 +29,16 @@
       {!! Form::checkbox('active', 1, null, ['class' => 'form-control']) !!}
     </div>
  
+    <div class="form-group">
+       {!! Form::label('Product Image') !!}
+       {!! Form::file('image', null) !!}
+    </div>
  
-    {!! Form::hidden('category_id', 1) !!}
+    <div class="form-group">
+        {!! Form::label('category_id', 'Product Category') !!}
+        @include('admin.partials.tree', ['list' => $category_tree, 'category_edit' => true, 'parent_id' => null, 'product_edit' => true])
+    </div> 
+
     
     <div class="form-group">
       {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}

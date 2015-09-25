@@ -8,10 +8,10 @@
 
   <hr />
   
-  {!! Form::open(['url' => 'admin/catalog/product']) !!}
+  {!! Form::open(['url' => 'admin/catalog/product', 'files' => true]) !!}
   
     
-    @include('admin.catalog_product.form', ['submitButtonText' => 'Add Product'])
+    @include('admin.catalog_product.form', ['submitButtonText' => 'Add Product', 'checked_id' => null])
 
     
   {!! Form::close() !!}

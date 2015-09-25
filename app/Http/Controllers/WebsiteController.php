@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Requests\PageRequest;
 use App\Http\Controllers\Controller;
 use App\Page;
+use Illuminate\Support\Facades\Input as Input;
+
 
 /* 
  * This controller is for displaying pages on the website
@@ -43,7 +45,6 @@ class WebsiteController extends Controller
     {
       return view('static_pages.contact')->with('title', 'Contact Page');
     }
-    
     
 
 }

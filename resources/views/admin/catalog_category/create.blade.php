@@ -11,7 +11,7 @@
   {!! Form::open(['url' => 'admin/catalog/category']) !!}
   
     
-    @include('admin.catalog_category.form', ['submitButtonText' => 'Add Category'])
+    @include('admin.catalog_category.form', ['submitButtonText' => 'Add Category', 'parent_id' => null])
 
     
   {!! Form::close() !!}

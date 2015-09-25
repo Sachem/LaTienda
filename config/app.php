@@ -137,8 +137,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
-        'Way\Generators\GeneratorsServiceProvider',
-        'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
+        //'Way\Generators\GeneratorsServiceProvider',
+        //'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
         
 
         /*

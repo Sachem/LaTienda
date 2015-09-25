@@ -24,6 +24,7 @@ class CreateCatalogProductTable extends Migration
         $table->decimal("price", 12, 4)->nullable();
         $table->decimal("discounted_price", 12, 4)->nullable();
         $table->string("sku", 150)->default("")->nullable();
+        $table->boolean("active");
         $table->timestamps();
         
         $table->foreign('category_id')

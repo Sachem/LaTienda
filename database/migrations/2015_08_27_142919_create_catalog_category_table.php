@@ -22,6 +22,7 @@ class CreateCatalogCategoryTable extends Migration
         $table->string("name", 150)->default("")->nullable();
         $table->text("description")->nullable();
         $table->string("url", 150)->default("")->nullable();
+        $table->boolean("active");
         $table->timestamps();
 
       });

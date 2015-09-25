@@ -19,7 +19,8 @@ class CatalogProduct extends Model
         'description',
         'price',
         'discounted_price',
-        'sku'
+        'sku',
+        'active'
     ];
     
     

@@ -17,7 +17,8 @@ class CatalogCategory extends Model
         'parent_id',
         'name',
         'description',
-        'url'
+        'url',
+        'active'
     ];
     
     

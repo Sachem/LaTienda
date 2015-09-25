@@ -18,6 +18,7 @@
 }); 
 */
 
+
 Route::get('/', 'WebsiteController@hello');
 Route::get('about', 'WebsiteController@about');
 Route::get('contact', 'WebsiteController@contact');
@@ -61,8 +62,12 @@ Route::group([
 
       
         Route::resource('product', 'CatalogProductController');
-        
         Route::resource('category', 'CatalogCategoryController');
+        
+        Route::get('category/{category}/delete', 'CatalogCategoryController@delete');
+        
+        Route::post('dropzoneUpload', 'CatalogProductController@dropzoneFileUpload');
+        Route::get('dropzoneGet', 'CatalogProductController@dropzoneGetFiles');
       
         /*
         Route::controllers([

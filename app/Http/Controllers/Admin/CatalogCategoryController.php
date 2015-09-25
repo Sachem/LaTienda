@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\CatalogCategoryRequest;
 use App\Http\Controllers\Controller;
 use App\CatalogCategory;
-
+use Latienda\Repositories\CatalogCategoryRepository;
 
 /*
  * This controller is for managing Categories (Admin only)
@@ -14,57 +14,33 @@ use App\CatalogCategory;
 
 class CatalogCategoryController extends Controller
 {
-    protected $categories;
-    protected $category_tree = [];
-    
+   
     /**
      * 
      * @return type
      */
     public function index()
     {
-        
-      $category_tree = $this->category_tree = $this->buildFullTree();
-      $categories = $this->categories;
-      //dd($this->category_tree, $this->categories);
-      
-      return view('admin.catalog_category.index', compact('categories', 'category_tree'));
-    }
-    
-    protected function buildFullTree()
-    {
-        $this->categories = CatalogCategory::all();
            
-        return $this->getChildren(0);
+      $category_tree = CatalogCategoryRepository::fullTree();
+
+      return view('admin.catalog_category.index', compact('category_tree'));
     }
     
-    protected function values(CatalogCategory $category)
-    {
-        return $result = [
-            'id' => $category->id,
-            'name' => $category->name,
-            'parent_id' => $category->parent_id,
-            'children' => $this->getChildren($category->id)
-        ];
+
+    public function delete(CatalogCategory $category)
+    {  
+      return view('admin.catalog_category.delete', compact('category'));
     }
     
-    protected function getChildren($parent_id) 
+    public function destroy(CatalogCategory $category) 
     {
-        $result = [];
-        
-        foreach ($this->categories as $category)
-        {
-            if ($category->parent_id == $parent_id)
-            {
-                $result[] = $this->values($category);
-            }
-        }
-        
-        return $result;
+      $category->delete();
+      
+      return redirect('admin/catalog/category')->with([
+        'flash_message' => 'Category deleted'
+      ]);
     }
-
-
-
 
     /**
      * 
@@ -73,6 +49,7 @@ class CatalogCategoryController extends Controller
      */
     public function edit(CatalogCategory $category)
     {  
+
       $category_tree = $this->buildFullTree();
         
       return view('admin.catalog_category.edit', compact('category','category_tree'));
@@ -98,7 +75,9 @@ class CatalogCategoryController extends Controller
      */
     public function create()
     {
-      return view('admin.catalog_category.create');
+      $category_tree = $this->buildFullTree();
+      
+      return view('admin.catalog_category.create', compact('category_tree'));
     }
     
     /**

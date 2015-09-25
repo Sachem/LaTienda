@@ -6,6 +6,14 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
       <script src="/js/jquery.min.js"></script>
       <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/dropzone.js"></script>
+      <!--
+      
+      http://tutsnare.com/post-data-using-ajax-in-laravel-5/
+      
+      <meta name="_token" content="{!! csrf_token() !!}"/>
+      
+      -->
     </head>
     <body>
         
@@ -22,6 +30,10 @@
                           
 
         </div>
-        
+        <!--<script type="text/javascript">
+          $.ajaxSetup({
+             headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+          });
+        </script>-->
     </body>
 </html>
