@@ -50,7 +50,7 @@ class CatalogCategoryController extends Controller
     public function edit(CatalogCategory $category)
     {  
 
-      $category_tree = $this->buildFullTree();
+      $category_tree = CatalogCategoryRepository::fullTree();
         
       return view('admin.catalog_category.edit', compact('category','category_tree'));
     }
@@ -75,7 +75,7 @@ class CatalogCategoryController extends Controller
      */
     public function create()
     {
-      $category_tree = $this->buildFullTree();
+      $category_tree = CatalogCategoryRepository::fullTree();
       
       return view('admin.catalog_category.create', compact('category_tree'));
     }

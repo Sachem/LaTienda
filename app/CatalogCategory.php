@@ -29,6 +29,6 @@ class CatalogCategory extends Model
      */
     public function products()
     {
-      return $this->hasMany('App\CatalogProduct');
+      return $this->hasMany('App\CatalogProduct', 'category_id');
     }
 }

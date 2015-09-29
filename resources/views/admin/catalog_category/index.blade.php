@@ -4,6 +4,6 @@
   <a href="{{ url('/admin/catalog/category/create') }}">Add Category</a>
   <h1>Categories</h1>
   
-  @include('admin.partials.tree', ['list' => $category_tree, 'category_edit' => false])
+  @include('admin.partials.tree', ['list' => $category_tree, 'category_edit' => false, 'product_edit' => false])
   
 @stop

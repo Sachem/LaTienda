@@ -9,7 +9,7 @@
             <span>Root</span>
 
             @if ($category_edit)
-            <input type="checkbox" name="{{ $product_edit ? 'category_id' : 'parent_id' }}" value="0" {{ $checked_id === 0 ? 'checked' : '' }} class="parent_category_checkbox" />
+            <input type="checkbox" name="parent_id" value="0" {{ $checked_id === 0 ? 'checked' : '' }} class="parent_category_checkbox" />
             @endif
             
             <ul>

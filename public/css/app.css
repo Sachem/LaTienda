@@ -5,7 +5,24 @@ a.expand{
     cursor: pointer;
 }
 
+.thumbnail{
+    width: 120px;
+    height: 120px; 
+    background-size: 120px 120px;
+    float: left;
+    margin: 20px 20px 0 0;
+}
 
+.clear{
+    clear:both;
+    margin-top:30px;
+}
+
+
+.dropzone .dz-preview .dz-image img{
+      width: 120px;
+      height: 120px;
+    }
 
 
 .single-dropzone {
@@ -13,6 +30,31 @@ a.expand{
     display: none;
   }
 }
+
+#add-to-basket{
+  margin-top:20px;  
+}
+
+.product-description{
+    float:none;
+}
+
+.basket-items .item div{
+    float: left;
+    margin: 10px;
+}
+
+.basket-items .item .picture{
+    width: 120px;
+    height: 120px; 
+    background-size: 120px 120px;   
+}
+
+.basket-items .item .item-quantity{
+    width:30px;
+    text-align:right;
+}
+
  
 
 

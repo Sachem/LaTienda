@@ -23,6 +23,15 @@ class CatalogProduct extends Model
         'active'
     ];
     
+    /**
+     * Product has many ProductImages
+     * 
+     * @return type
+     */
+    public function images()
+    {
+      return $this->hasMany('App\CatalogProductImage', 'product_id');
+    }
     
     /**
      * Product is owned by a Category

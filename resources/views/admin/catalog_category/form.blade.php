@@ -5,7 +5,7 @@
 
     <div class="form-group">
         {!! Form::label('parent_id', 'Parent Category') !!}
-        @include('admin.partials.tree', ['list' => $category_tree, 'category_edit' => true])
+        @include('admin.partials.tree', ['list' => $category_tree, 'category_edit' => true, 'product_edit' => false])
     </div>    
         
     <div class="form-group">

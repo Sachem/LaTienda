@@ -2,18 +2,15 @@
 <html>
     <head>
       <title>LaTienda</title>
-      <link rel="stylesheet" href="/css/app.css">
+      
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/css/app.css">
+
       <script src="/js/jquery.min.js"></script>
       <script src="/js/bootstrap.min.js"></script>
       <script src="/js/dropzone.js"></script>
-      <!--
-      
-      http://tutsnare.com/post-data-using-ajax-in-laravel-5/
-      
-      <meta name="_token" content="{!! csrf_token() !!}"/>
-      
-      -->
+
+      <meta name="_token" content="{!! csrf_token() !!}"/> 
     </head>
     <body>
         
@@ -22,7 +19,8 @@
             
             @include('partials.top-bar')
             
-            @include('partials.nav-bar')
+            @include('partials.admin-nav-bar')
+            @include('partials.client-nav-bar')
             
             @include('partials.flash')
                 
@@ -30,10 +28,12 @@
                           
 
         </div>
-        <!--<script type="text/javascript">
+        
+        <script type="text/javascript">
           $.ajaxSetup({
              headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
           });
-        </script>-->
+        </script>
+        
     </body>
 </html>

@@ -18,8 +18,8 @@ class CreateCatalogProductImageTable extends Migration
 
         $table->increments('id');
         $table->integer("product_id")->unsigned();
-        $table->integer("position")->unsigned();
-        $table->string("filename", "100")->default("");
+        $table->integer("position")->default(0)->unsigned();
+        $table->string("extension", "4")->default("");
         $table->string("title", "100")->default("")->nullable();
         $table->timestamps();
 

@@ -49,10 +49,8 @@ class CatalogProductTableSeeder extends Seeder {
     {
         DB::table('catalog_product')->delete();
 
-        CatalogProduct::create(
-            array('name' => 'Porshe', 'category_id' => 1, 'price' => 700000)
-            //array('name' => 'BMW', 'price' => 150000)
-        );
+        CatalogProduct::create(array('name' => 'Porshe 911', 'category_id' => 2, 'price' => 700000, 'description' => 'This is a classic model of Porshe, legend 911. Blah blah Blah blah Blah blah Blah blah.<br /><br />Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah.'));
+        CatalogProduct::create(array('name' => 'BMW X6', 'category_id' => 2, 'price' => 320000, 'description' => 'Nice Pseudo-SUV model of BMW. Nice Pseudo-SUV model of BMW. Nice Pseudo-SUV model of BMW. <br /><br />Nice Pseudo-SUV model of BMW. Nice Pseudo-SUV model of BMW. Nice Pseudo-SUV model of BMW. Nice Pseudo-SUV model of BMW.'));
     }
 
 }

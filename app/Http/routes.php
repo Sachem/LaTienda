@@ -18,6 +18,11 @@
 }); 
 */
 
+// Display all SQL executed in Eloquent
+Event::listen('illuminate.query', function($query)
+{
+   // var_dump($query);
+});
 
 Route::get('/', 'WebsiteController@hello');
 Route::get('about', 'WebsiteController@about');
@@ -26,7 +31,14 @@ Route::get('contact', 'WebsiteController@contact');
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
+    'basket' => 'BasketController',
 ]);
+
+
+
+Route::get('product/{product}', 'LatiendaController@showProduct');
+Route::get('category/{category}', 'LatiendaController@showCategory');
+        
 
 /**
  * Admin Routes
@@ -64,18 +76,12 @@ Route::group([
         Route::resource('product', 'CatalogProductController');
         Route::resource('category', 'CatalogCategoryController');
         
-        Route::get('category/{category}/delete', 'CatalogCategoryController@delete');
+        Route::get('category/{category}/delete', 'CatalogCategoryController@delete');       
         
-        Route::post('dropzoneUpload', 'CatalogProductController@dropzoneFileUpload');
-        Route::get('dropzoneGet', 'CatalogProductController@dropzoneGetFiles');
-      
-        /*
         Route::controllers([
-            'product'   => 'CatalogProductController',
-            //'category'  => 'CategoryController',
+            'dropzone'  => 'DropzoneController',
         ]);
-         */
-
+        
     });
        
 });

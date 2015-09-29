@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\CatalogProductRequest;
 use App\Http\Controllers\Controller;
 use App\CatalogProduct;
+use App\CatalogProductImage;
 use Latienda\Repositories\CatalogCategoryRepository;
 
 
@@ -26,16 +27,7 @@ class CatalogProductController extends Controller
      
       return view('admin.catalog_product.index', compact('products'));
     }
-    
-    /**
-     * 
-     * @param CatalogProduct $product
-     * @return type
-     */
-    /*public function show(CatalogProduct $product)
-    {  
-      return view('admin.catalog_product.show', compact('product'));
-    }*/
+   
     
     /**
      * 
@@ -58,7 +50,7 @@ class CatalogProductController extends Controller
     {  
       $product->update($request->all());
       
-      $this->saveImageFile($request, $product);
+      //$this->saveImageFile($request, $product);
       
       return redirect('admin/catalog/product/'.$product->id.'/edit')->with([
         'flash_message' => 'Product updated'
@@ -86,7 +78,7 @@ class CatalogProductController extends Controller
       
       $product->save();
       
-      $this->saveImageFile($request, $product);
+      //$this->saveImageFile($request, $product);
      
       return redirect('admin/catalog/product');
     }
@@ -100,52 +92,6 @@ class CatalogProductController extends Controller
       );
     }
     
-    public function dropzoneFileUpload() 
-    {
-      if(\Request::ajax()) 
-      { 
-        $file = \Input::file('file');
-
-        $destinationPath = public_path() . '/images/catalog/';
-        $filename = $file->getClientOriginalName();
-        $upload_success = \Input::file('file')->move($destinationPath, $filename);
-        
-        if ($upload_success) 
-        {
-            return \Response::json('success', 200);
-        } 
-        else 
-        {
-            return \Response::json('error', 400);
-
-        }
-      }
-      
-    }
     
-    public function dropzoneGetFiles() 
-    {
-      $result  = array();
- 
-      $imageFolder = public_path() . '/images/catalog/';
-      
-      $files = scandir($imageFolder);                 //1
-      if ( false!==$files ) {
-          foreach ( $files as $file ) {
-              if ( '.'!=$file && '..'!=$file) {                             //2
-                  $obj['name'] = $file;
-                  $obj['size'] = filesize($imageFolder.$file);
-                  $result[] = $obj;
-              }
-          }
-      }
-/*
-      header('Content-type: text/json');                                    //3
-      header('Content-type: application/json');
-      echo json_encode($result);
-*/      
-      return \Response::json($result, 200);
-
-    }
 
   }

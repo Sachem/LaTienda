@@ -5,7 +5,8 @@
 
     <input type="checkbox" name="{{ $product_edit ? 'category_id' : 'parent_id' }}" value="{{ $id }}" {{ $checked_id == $id ? 'checked' : '' }} class="parent_category_checkbox" />
     
-    @if ($parent_id == $id)
+    <!--
+    @if ($checked_id == $id)
     
         <script>
         
@@ -21,7 +22,8 @@
         </script>
     
     @endif
-
+    -->
+    
 @else
 
     <a href='{{ url('/admin/catalog/category/'.$id.'/edit') }}'>
