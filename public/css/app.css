@@ -13,10 +13,7 @@ a.expand{
     margin: 20px 20px 0 0;
 }
 
-.clear{
-    clear:both;
-    margin-top:30px;
-}
+
 
 
 .dropzone .dz-preview .dz-image img{
@@ -31,8 +28,8 @@ a.expand{
   }
 }
 
-#add-to-basket{
-  margin-top:20px;  
+.add-to-basket{
+  margin-top:40px;  
 }
 
 .product-description{
@@ -50,13 +47,16 @@ a.expand{
     background-size: 120px 120px;   
 }
 
-.basket-items .item .item-quantity{
+.basket-items .item .basket-item-quantity{
     width:30px;
     text-align:right;
 }
 
  
-
+.clear{
+    clear:both;
+    margin:30px 0 0 0 !important;
+}
 
 
 /*

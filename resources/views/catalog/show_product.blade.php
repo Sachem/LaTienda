@@ -17,6 +17,8 @@
   <div class="clear"></div>
   
   @include('catalog.basket.partials.add_button')
+  
+  @include('catalog.basket.partials.add_button_script')
 
   
 @stop

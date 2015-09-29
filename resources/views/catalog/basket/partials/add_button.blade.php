@@ -1,21 +1,7 @@
-<input type="button" value="Add To Basket" id="add-to-basket" />
+<div class="add-to-basket">
+  <input type="hidden" class="basket-item-id" value="{{ $product->id }}" />
+  <input type="button" value="Add To Basket" class="add-to-basket-button" />
+</div>
 
-<script>
-  $('#add-to-basket').click(function(){
-    
-    $.post('{{ URL::to('basket/addItem') }}' , {product_id: {{ $product->id }}}, function(data) {
-     
-      if (data == 'success')
-      {
-        alert('Product added to basket.');
-      }
-      else
-      {
-        alert('There was a problem adding to basket!');
-      }
 
-    });
-    
-  });
-</script>
   

@@ -33,7 +33,7 @@ class BasketController extends Controller
       
       //dd($items);
       
-      return view('catalog.basket.index', compact('items'));
+      return view('catalog.basket.basket', compact('items'));
     }
 
     /**
@@ -60,10 +60,6 @@ class BasketController extends Controller
       }
       
       DB::beginTransaction();
-      
-      
-      
-      
       
       // add to basket
       $product_was_already_in_basket = false;
@@ -109,7 +105,39 @@ class BasketController extends Controller
      */
     public function postRemoveItem()
     {
+      // basket item id (passed by AJAX)
+      $item_id = Input::get('item_id');
+           
+      if (Auth::check())
+      {
+        $basket_items = CatalogBasket::where('user_id', '=', Auth::user()->id)->first()->items;
+      }
       
+      DB::beginTransaction();
+      
+      $item_removed_from_basket = false;
+      foreach ($basket_items as $basket_item)
+      {
+        //product found in basket, removing
+        if ($basket_item->id == $item_id)
+        {
+          $item_removed_from_basket = $basket_item->delete();
+          break;
+        }
+      }
+      
+      if ($item_removed_from_basket) 
+      {
+        DB::commit();
+
+        return Response::json('success', 200);
+      } 
+      else 
+      {
+        DB::rollback();
+
+        return Response::json('error', 400);
+      }
     }
 
     /**
@@ -117,6 +145,45 @@ class BasketController extends Controller
      */
     public function postChangeQuantity()
     {
+      // basket item id (passed by AJAX)
+      $item_id = Input::get('item_id');
+      $quantity = Input::get('quantity');
+           
+      if (! is_numeric($quantity) or $quantity < 0 or $quantity != (int)$quantity)
+      {
+        return Response::json('error', 400);
+      }
       
+      if (Auth::check())
+      {
+        $basket_items = CatalogBasket::where('user_id', '=', Auth::user()->id)->first()->items;
+      }
+      
+      DB::beginTransaction();
+      
+      $item_quantity_changed = false;
+      foreach ($basket_items as $basket_item)
+      {
+        //product already in basket, increment quantity
+        if ($basket_item->id == $item_id)
+        {
+          $basket_item->quantity = $quantity;
+          $item_quantity_changed = $basket_item->save();
+          break;
+        }
+      }
+      
+      if ($item_quantity_changed) 
+      {
+        DB::commit();
+
+        return Response::json('success', 200);
+      } 
+      else 
+      {
+        DB::rollback();
+
+        return Response::json('error', 400);
+      }
     }
 }
