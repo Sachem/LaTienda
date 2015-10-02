@@ -11,7 +11,7 @@ class CatalogProduct extends Model
      *
      * @var string
      */
-    protected $table = 'catalog_product';
+    protected $table = 'catalog_products';
   
     protected $fillable = [
         'category_id',
@@ -22,6 +22,12 @@ class CatalogProduct extends Model
         'sku',
         'active'
     ];
+    
+    
+    public function scopeActive($query)
+    {
+      $query->where('active', '=', 1);
+    }
     
     /**
      * Product has many ProductImages

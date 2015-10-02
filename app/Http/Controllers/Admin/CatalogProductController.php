@@ -80,9 +80,12 @@ class CatalogProductController extends Controller
       
       //$this->saveImageFile($request, $product);
      
-      return redirect('admin/catalog/product');
+      return redirect('admin/catalog/product/'.$product->id.'/edit')->with([
+        'flash_message' => 'Product added. Please upload some pictures of it now by dragging them to the field below.'
+      ]);
     }
     
+    /*
     protected function saveImageFile($request, $product)
     {
       $imageName = $product->id . '.' . $request->file('image')->getClientOriginalExtension();
@@ -91,7 +94,7 @@ class CatalogProductController extends Controller
           base_path() . '/public/images/catalog/', $imageName
       );
     }
-    
+    */
     
 
   }

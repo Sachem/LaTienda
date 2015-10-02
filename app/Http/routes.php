@@ -28,6 +28,8 @@ Route::get('/', 'WebsiteController@hello');
 Route::get('about', 'WebsiteController@about');
 Route::get('contact', 'WebsiteController@contact');
 
+Route::get('admin', 'WebsiteController@helloAdmin');
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
@@ -36,8 +38,8 @@ Route::controllers([
 
 
 
-Route::get('product/{product}', 'LatiendaController@showProduct');
-Route::get('category/{category}', 'LatiendaController@showCategory');
+Route::get('product/{product}/{product_name}', 'LatiendaController@showProduct');
+Route::get('category/{category}/{category_name}', 'LatiendaController@showCategory');
         
 
 /**

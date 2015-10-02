@@ -21,3 +21,10 @@
     <div class="form-group">
       {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
     </div>
+
+@section('footer')
+
+  <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+  <script>tinymce.init({selector:'textarea'});</script>
+
+@stop

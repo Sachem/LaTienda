@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePagesTable extends Migration
+class CreateCatalogOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,19 +12,23 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('catalog_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('title');
-            $table->text('content');
-            $table->boolean('visible');
-            $table->string('meta_description');
+            $table->integer('payment_id')->unsigned();
+            $table->string('delivery_address_line1');
+            $table->string('delivery_address_line2');
+            $table->string('delivery_city');
+            $table->string('delivery_postcode');
             $table->timestamps();
             
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users');
-                      //->onDelete('cascade')
+            
+            $table->foreign('payment_id')
+                    ->references('id')
+                    ->on('payments');
         });
     }
 
@@ -35,6 +39,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pages');
+        Schema::drop('catalog_orders');
     }
 }

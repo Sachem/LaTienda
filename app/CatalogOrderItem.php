@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CatalogBasketItem extends Model
+class CatalogOrderItem extends Model
 {
-  protected $table = 'catalog_basket_items';
+  protected $table = 'catalog_order_items';
   
-  public function basket()
+  public function order()
   {
-    return $this->belongsTo('App\CatalogBasket', 'basket_id');
+    return $this->belongsTo('App\CatalogOrder', 'order_id');
   }
   
   public function product()

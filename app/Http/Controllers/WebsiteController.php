@@ -29,6 +29,15 @@ class WebsiteController extends Controller
      * 
      * @return type
      */
+    public function helloAdmin()
+    {
+      return view('static_pages.hello_admin');
+    }
+    
+    /**
+     * 
+     * @return type
+     */
     public function about()
     {
       return view('static_pages.about')->with([

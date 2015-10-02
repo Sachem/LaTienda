@@ -4,11 +4,11 @@
 
   <a href='{{ url('/admin/page') }}'>&laquo; back</a>
 
-  <h1>Add New Page</h1>
+  <h1>Create New Page</h1>
 
   <hr />
   
-  {!! Form::open(['url' => 'page']) !!}
+  {!! Form::open(['url' => 'admin/page']) !!}
   
     
     @include('admin.pages.form', ['submitButtonText' => 'Add Page'])

@@ -11,7 +11,7 @@ class CatalogProductImage extends Model
      *
      * @var string
      */
-    protected $table = 'catalog_product_image';
+    protected $table = 'catalog_product_images';
     
     /**
      * ProductImage is owned by a Product

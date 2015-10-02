@@ -20,13 +20,21 @@
           <ul class="dropdown-menu">
     
             @foreach ($categories as $category)
-            <li><a href='{{ url('category/'.$category->id) }}'>{{ $category->name }}</a></li>
+            <li><a href='{{ url('category/'.$category->id.'/'.str_slug($category->name)) }}'>{{ $category->name }}</a></li>
             @endforeach
             
           </ul>
         </li>
       </ul>
-      
+        
+      @if (Auth::check())
+        @if (Auth::user()->admin == 1)
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/admin">GOTO: ADMIN</a></li>
+        </ul>
+        @endif
+      @endif
+        
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

@@ -3,18 +3,7 @@
 @section('content')
 
   <a href='{{ url('/admin/catalog/product') }}'>&laquo; back</a>
-
-  <h1>Edit Product: {{ $product->title }}</h1>
-
-  <hr />
   
-  {!! Form::model($product, ['method' => 'PATCH', 'action' => ['Admin\CatalogProductController@update', $product->id], 'files' => true]) !!}
-  
-    
-    @include('admin.catalog_product.form', ['submitButtonText' => 'Update Product', 'checked_id' => $product->category_id])
-
-    
-  {!! Form::close() !!}
   
   <h2>Upload Product Images</h2>
   
@@ -27,6 +16,19 @@
     {!! Form::hidden('product_id', $product->id) !!}
   
   {!! Form::close() !!}
+
+  <h2>Edit Product: {{ $product->title }}</h2>
+
+  <hr />
+  
+  {!! Form::model($product, ['method' => 'PATCH', 'action' => ['Admin\CatalogProductController@update', $product->id], 'files' => true]) !!}
+  
+    
+    @include('admin.catalog_product.form', ['submitButtonText' => 'Update Product', 'checked_id' => $product->category_id])
+
+    
+  {!! Form::close() !!}
+  
   
   <script>
 

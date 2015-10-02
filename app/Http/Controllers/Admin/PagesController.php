@@ -21,7 +21,8 @@ class PagesController extends Controller
      */
     public function index()
     {
-      $pages = Page::latest()->visible()->get();
+      //$pages = Page::latest()->visible()->get();
+      $pages = Page::latest()->get();
       
       return view('admin.pages.index', compact('pages'));
     }
@@ -55,7 +56,7 @@ class PagesController extends Controller
     {  
       $page->update($request->all());
       
-      return redirect('/')->with([
+      return redirect('/admin/page')->with([
         'flash_message' => 'Page updated'
       ]);
     }
@@ -79,7 +80,9 @@ class PagesController extends Controller
       
       \Auth::user()->pages()->save($page);
       
-      return redirect('/');
+      return redirect('/admin/page')->with([
+        'flash_message' => 'Create new page'
+      ]);
     }
     
 

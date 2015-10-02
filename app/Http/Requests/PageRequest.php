@@ -23,6 +23,8 @@ class PageRequest extends Request
      */
     public function rules()
     {
+      $this->merge(['visible' => $this->input('visible', 0)]);
+      
         return [
             'title' => 'required',
             'content' => 'required|min:5',

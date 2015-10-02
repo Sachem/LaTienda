@@ -12,7 +12,7 @@ class CreateCatalogProductImageTable extends Migration
      */
     public function up()
     {
-      Schema::create('catalog_product_image', function (Blueprint $table) {
+      Schema::create('catalog_product_images', function (Blueprint $table) {
 
         $table->engine = 'InnoDB';
 
@@ -25,7 +25,7 @@ class CreateCatalogProductImageTable extends Migration
 
         $table->foreign('product_id')
                 ->references('id')
-                ->on('catalog_product');
+                ->on('catalog_products');
         });
     }
 
@@ -36,6 +36,6 @@ class CreateCatalogProductImageTable extends Migration
      */
     public function down()
     {
-        Schema::drop('catalog_product_image');
+        Schema::drop('catalog_product_images');
     }
 }

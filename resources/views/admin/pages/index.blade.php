@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+  <a href="{{ url('/admin/page/create') }}">Create New Page</a>
   <h1>Pages</h1>
   <ul>
     @foreach ($pages as $page)

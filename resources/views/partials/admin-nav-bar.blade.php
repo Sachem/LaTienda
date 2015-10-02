@@ -26,6 +26,10 @@
           </ul>
         </li>
       </ul>
+        
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="/">GOTO: CLIENT</a></li>
+      </ul>
       
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

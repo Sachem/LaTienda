@@ -12,7 +12,7 @@ class CreateCatalogProductTable extends Migration
      */
     public function up()
     {
-      Schema::create("catalog_product", function (Blueprint $table){
+      Schema::create("catalog_products", function (Blueprint $table){
 
         $table->engine = 'InnoDB';
 
@@ -21,15 +21,15 @@ class CreateCatalogProductTable extends Migration
         $table->integer("category_id")->unsigned();
         $table->string("name", 150)->default("")->nullable();
         $table->longText("description")->nullable();
-        $table->decimal("price", 12, 4)->nullable();
-        $table->decimal("discounted_price", 12, 4)->nullable();
+        $table->decimal("price", 10, 2)->nullable();
+        $table->decimal("discounted_price", 10, 2)->nullable();
         $table->string("sku", 150)->default("")->nullable();
-        $table->boolean("active");
+        $table->boolean("active")->default(1);
         $table->timestamps();
         
         $table->foreign('category_id')
                     ->references('id')
-                    ->on('catalog_category');
+                    ->on('catalog_categories');
 
       });
     }
@@ -41,6 +41,6 @@ class CreateCatalogProductTable extends Migration
      */
     public function down()
     {
-      Schema::drop("catalog_product");
+      Schema::drop("catalog_products");
     }
 }

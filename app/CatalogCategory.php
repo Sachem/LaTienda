@@ -11,7 +11,7 @@ class CatalogCategory extends Model
      *
      * @var string
      */
-    protected $table = 'catalog_category';
+    protected $table = 'catalog_categories';
   
     protected $fillable = [
         'parent_id',

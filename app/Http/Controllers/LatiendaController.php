@@ -26,7 +26,7 @@ class LatiendaController extends Controller
     
     public function showCategory(CatalogCategory $category)
     {  
-      $products = $category->products;
+      $products = CatalogProduct::where('category_id', '=', $category->id)->active()->paginate(3);
       
       return view('catalog.show_category', compact('category', 'products'));
     }

@@ -23,6 +23,8 @@ class CatalogCategoryRequest extends Request
       */ 
     public function rules()
     {
+      $this->merge(['active' => $this->input('active', 0)]);
+      
         return [
             
             //

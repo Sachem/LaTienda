@@ -12,7 +12,7 @@ class CreateCatalogCategoryTable extends Migration
      */
     public function up()
     {
-      Schema::create("catalog_category", function (Blueprint $table){
+      Schema::create("catalog_categories", function (Blueprint $table){
 
         $table->engine = 'InnoDB';
 
@@ -35,6 +35,6 @@ class CreateCatalogCategoryTable extends Migration
      */
     public function down()
     {
-      Schema::drop("catalog_category");
+      Schema::drop("catalog_categories");
     }
 }

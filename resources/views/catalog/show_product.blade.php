@@ -16,6 +16,8 @@
   
   <div class="clear"></div>
   
+  <h2 class="price">Price: {{ $product->price }}</h2>
+  
   @include('catalog.basket.partials.add_button')
   
   @include('catalog.basket.partials.add_button_script')

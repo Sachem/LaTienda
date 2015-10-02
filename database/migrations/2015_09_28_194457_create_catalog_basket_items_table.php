@@ -25,7 +25,7 @@ class CreateCatalogBasketItemsTable extends Migration
             
             $table->foreign('product_id')
                 ->references('id')
-                ->on('catalog_product');
+                ->on('catalog_products');
             
         });
     }

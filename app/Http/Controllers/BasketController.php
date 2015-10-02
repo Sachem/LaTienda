@@ -24,14 +24,22 @@ class BasketController extends Controller
      */
     public function getIndex()
     {
-      $items = [];
-      
       if (Auth::check())
       {
-        $items = CatalogBasket::with('items.product.images')->where('user_id', '=', Auth::user()->id)->first()->items;
+        $basket = CatalogBasket::with('items.product.images')->where('user_id', '=', Auth::user()->id)->first();
       }
       
-      //dd($items);
+      // if user's basket does not exist - create it
+      if (! isset($basket))
+      {  
+        $basket = new CatalogBasket;
+        $basket->user_id = Auth::user()->id;
+        $basket->save();          
+      }
+
+      $items = $basket->items;
+      
+      
       
       return view('catalog.basket.basket', compact('items'));
     }

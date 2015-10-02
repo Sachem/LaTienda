@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMetaDescriptionColumnToPageTable extends Migration
+class CreateUserAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class AddMetaDescriptionColumnToPageTable extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->string('meta_description');
+        Schema::create('user_addresses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +25,6 @@ class AddMetaDescriptionColumnToPageTable extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->dropColumn('meta_description');
-        });
+        Schema::drop('user_addresses');
     }
 }
