@@ -34,13 +34,33 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
     'basket' => 'BasketController',
+    'checkout' => 'CheckoutController',
 ]);
 
 
 
 Route::get('product/{product}/{product_name}', 'LatiendaController@showProduct');
 Route::get('category/{category}/{category_name}', 'LatiendaController@showCategory');
-        
+ 
+
+/**
+ * User Account Routes
+ */
+
+Route::group([
+    'namespace' => 'Account',
+    'prefix' => 'account',
+    'middleware'    => 'auth',    
+], function(){
+
+    Route::controllers([
+        'details'  => 'CustomerDetailsController',
+        'orders'   => 'CustomerOrdersController',
+    
+    ]);
+
+});
+
 
 /**
  * Admin Routes
@@ -60,16 +80,6 @@ Route::group([
 
     Route::resource('page', 'PagesController');
     
-    /*
-    Route::group(['namespace' => 'Account'], function(){
-
-        Route::controllers([
-            'customer'  => 'CustomerController',
-            'admin'     => 'AdminController',
-        ]);
-
-    });
-*/
     Route::group([
         'prefix'    => 'catalog'
         ], function(){

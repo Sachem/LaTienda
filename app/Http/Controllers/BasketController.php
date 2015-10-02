@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\CatalogProduct;
 use App\CatalogBasket;
 use App\CatalogBasketItem;
 
@@ -28,20 +29,19 @@ class BasketController extends Controller
       {
         $basket = CatalogBasket::with('items.product.images')->where('user_id', '=', Auth::user()->id)->first();
       }
-      
+     
       // if user's basket does not exist - create it
       if (! isset($basket))
       {  
         $basket = new CatalogBasket;
-        $basket->user_id = Auth::user()->id;
+        $basket->user_id = Auth::user()->id; // HERE problema
         $basket->save();          
       }
 
       $items = $basket->items;
+      $basket_total = $basket->total_cost;
       
-      
-      
-      return view('catalog.basket.basket', compact('items'));
+      return view('catalog.basket.basket', compact('items','basket_total'));
     }
 
     /**
@@ -51,6 +51,7 @@ class BasketController extends Controller
     {
       // product id (passed by AJAX)
       $product_id = Input::get('product_id');
+      $product = CatalogProduct::find($product_id);
            
       if (Auth::check())
       {
@@ -93,6 +94,12 @@ class BasketController extends Controller
         $basket_update_result = $new_basket_item->save();
       }
       
+      if ($basket_update_result)
+      {
+        $basket->total_cost += $product->price;
+        $basket_update_result = $basket->save();
+      }
+      
    
       if ($basket_update_result) 
       {
@@ -123,16 +130,28 @@ class BasketController extends Controller
       
       DB::beginTransaction();
       
-      $item_removed_from_basket = false;
-      foreach ($basket_items as $basket_item)
+      // get basket item from database
+      $basket_item = CatalogBasketItem::with('basket', 'product')->find($item_id);
+      
+      // check if basket item belongs to logged in user
+      if ($basket_item->basket->user_id != Auth::user()->id)
       {
-        //product found in basket, removing
-        if ($basket_item->id == $item_id)
-        {
-          $item_removed_from_basket = $basket_item->delete();
-          break;
-        }
+        return Response::json('error', 403);
       }
+      
+      // change basket total cost
+      $quantity_difference =  -1 * $basket_item->quantity;
+      $basket_total_difference = $quantity_difference * $basket_item->product->price;
+      
+      $basket_total_changed = CatalogBasket::find($basket_item->basket->id)->increment('total_cost', $basket_total_difference);
+      
+      // remove basket item from database
+      $item_removed_from_basket = false;
+      if ($basket_total_changed)
+      {
+        $item_removed_from_basket = $basket_item->delete();
+      }
+      
       
       if ($item_removed_from_basket) 
       {
@@ -153,33 +172,44 @@ class BasketController extends Controller
      */
     public function postChangeQuantity()
     {
-      // basket item id (passed by AJAX)
+      // basket item_id And quantity (passed by AJAX)
       $item_id = Input::get('item_id');
       $quantity = Input::get('quantity');
            
-      if (! is_numeric($quantity) or $quantity < 0 or $quantity != (int)$quantity)
+      if (Auth::check()
+          and (! is_numeric($quantity) or $quantity < 0 or $quantity != (int)$quantity)
+      )
       {
         return Response::json('error', 400);
       }
       
-      if (Auth::check())
-      {
-        $basket_items = CatalogBasket::where('user_id', '=', Auth::user()->id)->first()->items;
-      }
       
       DB::beginTransaction();
       
-      $item_quantity_changed = false;
-      foreach ($basket_items as $basket_item)
+      // get basket item from database
+      $basket_item = CatalogBasketItem::with('basket', 'product')->find($item_id);
+      
+      // check if basket item belongs to logged in user
+      if ($basket_item->basket->user_id != Auth::user()->id)
       {
-        //product already in basket, increment quantity
-        if ($basket_item->id == $item_id)
-        {
-          $basket_item->quantity = $quantity;
-          $item_quantity_changed = $basket_item->save();
-          break;
-        }
+        return Response::json('error', 403);
       }
+      
+      // change basket total cost
+      $quantity_difference = $quantity - $basket_item->quantity;
+      $basket_total_difference = $quantity_difference * $basket_item->product->price;
+      
+      $basket_total_changed = CatalogBasket::find($basket_item->basket->id)->increment('total_cost', $basket_total_difference);
+      
+      
+      // change basket item quantity
+      $item_quantity_changed = false;
+      if ($basket_total_changed)
+      {
+        $basket_item->quantity = $quantity;
+        $item_quantity_changed = $basket_item->save();
+      }
+      
       
       if ($item_quantity_changed) 
       {

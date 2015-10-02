@@ -16,6 +16,4 @@
   
   @include('partials.pagination', ['paginator' => $products])
   
-  @include('catalog.basket.partials.add_button_script')
-  
 @stop

@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-  protected $table = 'catalog_payments';
+  protected $table = 'payments';
     //
 }

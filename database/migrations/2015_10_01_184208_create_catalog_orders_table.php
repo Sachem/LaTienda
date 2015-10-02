@@ -16,10 +16,12 @@ class CreateCatalogOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('payment_id')->unsigned();
-            $table->string('delivery_address_line1');
-            $table->string('delivery_address_line2');
+            $table->string('delivery_address_line_1');
+            $table->string('delivery_address_line_2');
             $table->string('delivery_city');
             $table->string('delivery_postcode');
+            $table->string('delivery_phone_number');
+            $table->string('delivery_instructions');
             $table->timestamps();
             
             $table->foreign('user_id')

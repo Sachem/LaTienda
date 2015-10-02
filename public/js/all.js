@@ -1741,7 +1741,32 @@ d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector
 }).call(this);
 
     
-$(document).ready(function(){    
+$(document).ready(function(){   
+  
+    /**
+     * Add to basket button
+     * 
+     * @returns alert
+     */
+    $('.add-to-basket-button').click(function(){
+
+      $product_id = $(this).parent().find('.basket-item-id').val();
+
+      $.post(location.protocol + "//" + location.host + '/basket/add-item' , {product_id: $product_id}, function(data) {
+
+        if (data == 'success')
+        {
+          alert('Product added to basket.');
+        }
+        else
+        {
+          alert('There was a problem adding to basket!');
+        }
+
+      });
+
+    });
+
     /**
      * Remove from basket
      * 
@@ -1752,7 +1777,7 @@ $(document).ready(function(){
       $parent = $(this).parent();
       $item_id = $parent.find('.basket-item-id').val();
       
-      $.post('basket/remove-item' , {item_id: $item_id}, function(data) {
+      $.post(location.protocol + "//" + location.host + '/basket/remove-item' , {item_id: $item_id}, function(data) {
 
         if (data == 'success')
         {
@@ -1778,7 +1803,7 @@ $(document).ready(function(){
       $item_id = $(this).parent().find('.basket-item-id').val();
       $quantity = $(this).parent().find('.basket-item-quantity').val();
       
-      $.post('basket/change-quantity' , {item_id: $item_id, quantity: $quantity}, function(data) {
+      $.post(location.protocol + "//" + location.host + '/basket/change-quantity' , {item_id: $item_id, quantity: $quantity}, function(data) {
 
         if (data == 'success')
         {

@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->integer('method_id')->default(1)->unsigned();
             $table->decimal('price', 10, 2)->default(1)->unsigned();
-            $table->string('status', 20);
+            $table->string('status', 20)->default('prepared');
             $table->timestamps();
         });
     }

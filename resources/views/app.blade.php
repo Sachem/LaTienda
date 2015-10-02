@@ -4,7 +4,7 @@
       <title>LaTienda</title>
       
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/css/app.css">
+      <link rel="stylesheet" href="/css/style.css">
 
       <script src="/js/all.js"></script>
 
