@@ -15,58 +15,87 @@ use Auth;
 use Response;
 use DB;
 use Input;
+use Illuminate\Cookie\CookieJar;
+use Cookie;
 
 class BasketController extends Controller
 {
+  protected function createBasket(CookieJar $cookie_jar = null)
+  {
+    $basket = new CatalogBasket;
+        
+    if (Auth::check())
+    {
+      $basket->user_id = Auth::user()->id;
+    }
+    else
+    {
+      $random_string = str_random(40);
+      $basket->session_token = $random_string;   
+      $cookie_jar->queue(Cookie::forever('LatiendaBasketId', $random_string));
+    }
+
+    $basket->save(); 
+    
+    return $basket;
+  }
+  
+  protected function retrieveBasket(CookieJar $cookie_jar = null)
+  {
+    
+    // if authorized user, find basket in DB by user_id
+    if (Auth::check())
+    {
+      $basket = CatalogBasket::with('items.product.images')->where('user_id', Auth::user()->id)->first();
+    }
+    elseif(Cookie::get('LatiendaBasketId')) // find by cookie
+    {
+      $basket = CatalogBasket::with('items.product.images')->where('session_token', Cookie::get('LatiendaBasketId'))->first();
+    }
+
+    // if user's basket does not exist - create it
+    if (! isset($basket))
+    {
+      $basket = $this->createBasket($cookie_jar);
+    }
+    
+    return $basket;
+  }
+  
+  protected function connectBaskets()
+  {
+    
+  }
+  
+  
     /**
      * Display a basket
      *
      * @return Response
      */
-    public function getIndex()
+    public function getIndex(CookieJar $cookie_jar)
     {
-      if (Auth::check())
-      {
-        $basket = CatalogBasket::with('items.product.images')->where('user_id', '=', Auth::user()->id)->first();
-      }
-     
-      // if user's basket does not exist - create it
-      if (! isset($basket))
-      {  
-        $basket = new CatalogBasket;
-        $basket->user_id = Auth::user()->id; // HERE problema
-        $basket->save();          
-      }
+      $basket = $this->retrieveBasket($cookie_jar);
 
       $items = $basket->items;
       $basket_total = $basket->total_cost;
-      
-      return view('catalog.basket.basket', compact('items','basket_total'));
+           
+      return view('catalog.basket.basket', compact('items','basket_total'));     
     }
 
     /**
      * [AJAX] Add product to basket
      */
-    public function postAddItem()
+    public function postAddItem(CookieJar $cookie_jar)
     {
       // product id (passed by AJAX)
       $product_id = Input::get('product_id');
       $product = CatalogProduct::find($product_id);
            
-      if (Auth::check())
-      {
-        $basket = CatalogBasket::where('user_id', '=', Auth::user()->id)->first();
-        
-        // if user's basket does not exist - create it
-        if (! $basket)
-        {  
-          $basket = new CatalogBasket;
-          $basket->user_id = Auth::user()->id;
-          $basket->save();          
-        }
-        
-        $basket_items = $basket->items;
-      }
+      
+      $basket = $this->retrieveBasket($cookie_jar);
+      $basket_items = $basket->items;
+      
       
       DB::beginTransaction();
       
@@ -123,10 +152,9 @@ class BasketController extends Controller
       // basket item id (passed by AJAX)
       $item_id = Input::get('item_id');
            
-      if (Auth::check())
-      {
-        $basket_items = CatalogBasket::where('user_id', '=', Auth::user()->id)->first()->items;
-      }
+      
+      $basket = $this->retrieveBasket(null);
+
       
       DB::beginTransaction();
       
@@ -134,7 +162,7 @@ class BasketController extends Controller
       $basket_item = CatalogBasketItem::with('basket', 'product')->find($item_id);
       
       // check if basket item belongs to logged in user
-      if ($basket_item->basket->user_id != Auth::user()->id)
+      if ($basket_item->basket->id != $basket->id)
       {
         return Response::json('error', 403);
       }
@@ -157,7 +185,7 @@ class BasketController extends Controller
       {
         DB::commit();
 
-        return Response::json('success', 200);
+        return Response::json(['result' => 'success', 'basket_total' => ($basket->total_cost + $basket_total_difference)], 200);
       } 
       else 
       {
@@ -176,13 +204,12 @@ class BasketController extends Controller
       $item_id = Input::get('item_id');
       $quantity = Input::get('quantity');
            
-      if (Auth::check()
-          and (! is_numeric($quantity) or $quantity < 0 or $quantity != (int)$quantity)
-      )
+      if (! is_numeric($quantity) or $quantity < 0 or $quantity != (int)$quantity)
       {
         return Response::json('error', 400);
       }
       
+      $basket = $this->retrieveBasket(null);
       
       DB::beginTransaction();
       
@@ -190,7 +217,7 @@ class BasketController extends Controller
       $basket_item = CatalogBasketItem::with('basket', 'product')->find($item_id);
       
       // check if basket item belongs to logged in user
-      if ($basket_item->basket->user_id != Auth::user()->id)
+      if ($basket_item->basket->id != $basket->id)
       {
         return Response::json('error', 403);
       }
@@ -212,16 +239,16 @@ class BasketController extends Controller
       
       
       if ($item_quantity_changed) 
-      {
+      { 
         DB::commit();
 
-        return Response::json('success', 200);
+        return Response::json(['result' => 'success', 'basket_total' => ($basket->total_cost + $basket_total_difference)], 200);
       } 
       else 
       {
         DB::rollback();
 
-        return Response::json('error', 400);
+        return Response::json(['result' => 'error'], 400);
       }
     }
 }

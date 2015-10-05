@@ -14,11 +14,11 @@ $(document).ready(function(){
 
         if (data == 'success')
         {
-          alert('Product added to basket.');
+          swal("OK", "Product added to basket.", "success");
         }
         else
         {
-          alert('There was a problem adding to basket!');
+          swal("Error", "There was a problem adding to basket.", "error");
         }
 
       });
@@ -37,14 +37,16 @@ $(document).ready(function(){
       
       $.post(location.protocol + "//" + location.host + '/basket/remove-item' , {item_id: $item_id}, function(data) {
 
-        if (data == 'success')
+        if (data['result'] == 'success')
         {
           $parent.parent().css('display','none');
-          alert('Product removed from basket.');
+          $('#basket_total').html(data['basket_total']);  
+          
+          swal("OK", "Product removed from basket.", "success");
         }
         else
         {
-          alert('There was a problem removing this product from basket!');
+          swal("Error", "There was a problem removing this product from basket.", "error");          
         }
 
       });
@@ -63,13 +65,15 @@ $(document).ready(function(){
       
       $.post(location.protocol + "//" + location.host + '/basket/change-quantity' , {item_id: $item_id, quantity: $quantity}, function(data) {
 
-        if (data == 'success')
+        if (data['result'] == 'success')
         {
-          alert('Quantity changed.');
+          $('#basket_total').html(data['basket_total']);  
+            
+          swal("OK", "Quantity changed.", "success");
         }
         else
         {
-          alert('There was a problem changing quantity of this product in your basket!');
+          swal("Error", "There was a problem changing quantity of this product in your basket.", "error");          
         }
 
       });

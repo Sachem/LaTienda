@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      view()->composer('partials.client-nav-bar', function($view)
+      view()->composer('partials.client_nav_bar', function($view)
       {
         $view->with('categories', CatalogCategory::where('parent_id', '!=', 0)->get());
         

@@ -1,6 +1,9 @@
 
 /*# sourceMappingURL=app.css.map */
 
+.address-display-group label{
+    width: 160px;
+}
 
 .form-horizontal .form-group-btn-primary{
     margin-right: 0px;

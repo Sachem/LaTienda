@@ -8,7 +8,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Admin</a>
+      @if (Auth::check() && Auth::user()->admin == 1)
+        <a class="navbar-brand" href="/">Admin</a>
+      @else
+        <a class="navbar-brand" href="#">Admin</a>            
+      @endif
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,9 +30,11 @@
           </ul>
         </li>
       </ul>
-        
+ 
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="/">GOTO: CLIENT</a></li>
+        <li>
+            @include('partials.login_bar')
+        </li>  
       </ul>
       
     </div><!-- /.navbar-collapse -->

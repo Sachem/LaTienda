@@ -10,7 +10,7 @@
 
       <div class="basket-items">
 
-        @each('catalog.checkout.partials.basket_item', $items, 'item')
+        @each('catalog.checkout.partials.order_item', $items, 'item')
 
       </div>
     

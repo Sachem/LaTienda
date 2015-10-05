@@ -17,4 +17,14 @@ class CatalogOrder extends Model
   {
     return $this->belongsTo('App\User', 'user_id');
   }
+
+  public function payment()
+  {
+    return $this->hasOne('App\Payment', 'id');
+  }
+  
+  public function delivery_address()
+  {
+    return $this->hasOne('App\OrderAddress', 'id');
+  }
 }

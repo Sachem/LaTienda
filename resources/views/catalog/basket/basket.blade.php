@@ -18,7 +18,7 @@
 
     @unless ($items->isEmpty())
     
-    <h3>Total: <span id="basket_total">£{{ $basket_total }}</span></h3>
+    <h3>Total: £<span id="basket_total">{{ $basket_total }}</span></h3>
 
     <div class="clear">
       <a class="btn btn-primary form-control" href="checkout">Proceed To Checkout &raquo;</a>

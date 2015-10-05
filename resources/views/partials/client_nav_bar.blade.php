@@ -8,7 +8,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Client</a>
+        
+      @if (Auth::check() && Auth::user()->admin == 1)
+        <a class="navbar-brand" href="/admin">Client</a>
+      @else
+        <a class="navbar-brand" href="#">Client</a>            
+      @endif
+      
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,15 +31,24 @@
             
           </ul>
         </li>
+        @if (Auth::check())
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Panel <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+
+              <li><a href='{{ url('account/details') }}'>Your Details</a></li>
+              <li><a href='{{ url('account/orders') }}'>Your Orders</a></li>
+
+            </ul>
+          </li>
+        @endif
       </ul>
         
-      @if (Auth::check())
-        @if (Auth::user()->admin == 1)
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/admin">GOTO: ADMIN</a></li>
-        </ul>
-        @endif
-      @endif
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+            @include('partials.login_bar')
+        </li>  
+      </ul>
         
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

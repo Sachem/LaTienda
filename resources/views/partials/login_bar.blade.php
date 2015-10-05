@@ -1,4 +1,4 @@
-<div class="top-bar" style="border-bottom:#444 1px dashed;padding:10px;display:block;height:40px;background-color: #ddd;margin-bottom:10px;">
+<div class="top-bar" style="padding:14px">
     <div style="float:right">
       @if (Auth::check())
       Logged in as <a href='{{ url('account/details') }}'>{{ Auth::user()->username }}</a> |

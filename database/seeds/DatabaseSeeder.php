@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
          $this->call(CatalogProductTableSeeder::class);
          $this->call(UserTableSeeder::class);
          $this->call(PageTableSeeder::class);
+         
+         App\CatalogBasket::create(['user_id' => 2, 'total_cost' => 1220000]);
+         App\CatalogBasketItem::create(['basket_id' => 1, 'product_id' => 1, 'quantity' => 1]);
+         App\CatalogBasketItem::create(['basket_id' => 1, 'product_id' => 2, 'quantity' => 1]);
+         App\CatalogBasketItem::create(['basket_id' => 1, 'product_id' => 3, 'quantity' => 1]);
 
          Eloquent::reguard();
         Model::reguard();

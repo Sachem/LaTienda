@@ -4,7 +4,7 @@
       <title>LaTienda</title>
       
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/all.css">
 
       <script src="/js/all.js"></script>
 
@@ -14,13 +14,10 @@
         
         <div class="container">
             
-            
-            @include('partials.top-bar')
-            
             @if (Request::is('admin*'))
-              @include('partials.admin-nav-bar')
+              @include('partials.admin_nav_bar')
             @else
-              @include('partials.client-nav-bar')
+              @include('partials.client_nav_bar')
             @endif
             
             @include('partials.flash')
