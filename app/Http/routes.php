@@ -11,32 +11,30 @@
 |
 */
 
-/*
-  Route::get('/', function () {
- 
-    return view('welcome');
-}); 
-*/
+  // Display all SQL executed in Eloquent
+    Event::listen('illuminate.query', function($query)
+    {
+       // var_dump($query);
+    });
 
-// Display all SQL executed in Eloquent
-Event::listen('illuminate.query', function($query)
-{
-   // var_dump($query);
-});
 
 Route::get('/', 'WebsiteController@hello');
-Route::get('about', 'WebsiteController@about');
-Route::get('contact', 'WebsiteController@contact');
 
-Route::get('admin', 'WebsiteController@helloAdmin');
+$pages = \App\Page::visible()->get();
+foreach ($pages as $page)
+{
+  Route::get($page->path, 'WebsiteController@cmsPage');
+}
+
+Route::post('contact_request', 'WebsiteController@contactFormSend');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
     'basket' => 'BasketController',
     'checkout' => 'CheckoutController',
+    'paypal' => 'PaypalPaymentController',
 ]);
-
 
 
 Route::get('product/{product}/{product_name}', 'LatiendaController@showProduct');
@@ -71,14 +69,22 @@ Route::group([
 Route::group([
     'namespace'     => 'Admin',
     'prefix'        => 'admin',
-    'middleware'    => 'auth',
+    'middleware'    => 'admin',
 ], function(){
+  
+    Route::get('/', function(){
+      
+      return view('static_pages.hello_admin');
+     
+    });
 
     Route::controllers([
         'config'    => 'ConfigController',
     ]);
 
     Route::resource('page', 'PagesController');
+    Route::resource('user', 'UsersController');
+    Route::resource('order', 'OrdersController');
     
     Route::group([
         'prefix'    => 'catalog'

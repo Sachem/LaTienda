@@ -113,6 +113,7 @@ class CheckoutController extends Controller
       $order = \App\CatalogOrder::with('items.product.images', 'payment', 'delivery_address')->find($id);
 
       return view('catalog.checkout.checkout_step_2', [
+          'order_id' => $order->id, 
           'order_total' => $order->payment->total, 
           'items' => $order->items, 
           'delivery_address' => $order->delivery_address

@@ -1,6 +1,9 @@
 
 /*# sourceMappingURL=app.css.map */
 
+.clickable-rows tr{cursor:pointer}
+.clickable-rows tr:hover{background-color: #5dc2f1 !important}
+
 .address-display-group label{
     width: 160px;
 }

@@ -17,8 +17,9 @@ class Page extends Model
     protected $fillable = [
         'title',
         'content',
-        'visible',
-        'meta_description'
+        'meta_description',
+        'contact_form',
+        'visible'
     ];
     
     public function scopeVisible($query)

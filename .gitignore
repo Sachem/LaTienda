@@ -4,3 +4,5 @@ Homestead.yaml
 .env
 /nbproject/private/
 /public/images/
+/app/Http/PayPal.log
+/config/paypal_payment.php

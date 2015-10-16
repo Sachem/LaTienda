@@ -7,6 +7,9 @@ use App\Http\Requests\PageRequest;
 use App\Http\Controllers\Controller;
 use App\Page;
 use Illuminate\Support\Facades\Input as Input;
+use Illuminate\Support\Facades\Validator as Validator;
+use Request;
+use Illuminate\Support\Facades\Mail;
 
 
 /* 
@@ -29,31 +32,55 @@ class WebsiteController extends Controller
      * 
      * @return type
      */
-    public function helloAdmin()
+    public function cmsPage(Request $request)
     {
-      return view('static_pages.hello_admin');
-    }
-    
-    /**
-     * 
-     * @return type
-     */
-    public function about()
-    {
-      return view('static_pages.about')->with([
-          'my_var' => 'dupa',
-          'my_var2' => 'pipa',
+      $page = Page::where('path', $request::path())->first();
+ 
+      
+      return view('cms_pages.cms_page')->with([
+          'title' => $page->title,
+          'content' => $page->content,
+          'contact_form' => $page->contact_form
       ]);
     }
     
-    /**
-     * 
-     * @return type
-     */
-    public function contact()
+    public function contactFormSend()         
     {
-      return view('static_pages.contact')->with('title', 'Contact Page');
-    }
-    
+        //Get all the data and store it inside Store Variable
+        $data = Input::all();
 
+        //Validation rules
+        $rules = array (
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required|min:5'
+        );
+
+        //Validate data
+        $validator = Validator::make ($data, $rules);
+
+        //If everything is correct than run passes.
+        if ($validator -> passes()){
+          
+          Mail::send('emails.feedback', ['data' => $data], function($message) use ($data)
+          {
+            $message->from($data['email'] , 'Secret Luxury'); //uncomment if using first name and email fields 
+            $message->to('karol.padiasek@gmail.com', 'John')->subject('Secret Luxury - contact form message'); // ->cc('feedback@gmail.com')
+          });
+            
+          return redirect('contact')->with([   
+            'flash_message' => 'Your message has been sent. Thank You!'
+          ]);
+
+
+            //return View::make('contact');  
+        }
+        else
+        {
+          //return contact form with errors
+          return redirect('contact')->with([   
+            'error_message' => 'Feedback must contain more than 5 characters. Try Again.'
+          ]);
+        }
+     }
 }

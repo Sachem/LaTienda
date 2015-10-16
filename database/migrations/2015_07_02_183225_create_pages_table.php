@@ -16,7 +16,9 @@ class CreatePagesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('title');
+            $table->string('path');
             $table->text('content');
+            $table->boolean('contact_form');
             $table->boolean('visible');
             $table->string('meta_description');
             $table->timestamps();

@@ -2,6 +2,11 @@
       {!! Form::label('title', 'Title') !!}
       {!! Form::text('title', null, ['class' => 'form-control']) !!}
     </div>
+
+    <div class="form-group">
+      {!! Form::label('path', 'URL') !!}
+      {!! Form::text('path', null, ['class' => 'form-control']) !!}
+    </div>
   
     <div class="form-group">
       {!! Form::label('content', 'Content') !!}
@@ -11,6 +16,11 @@
     <div class="form-group">
       {!! Form::label('meta_description', 'Meta Description') !!}
       {!! Form::text('meta_description', null, ['class' => 'form-control']) !!}
+    </div>
+  
+    <div class="form-group">
+      {!! Form::label('contact_form', 'Include Contact Form') !!}
+      {!! Form::checkbox('contact_form', 1, null, ['class' => 'form-control']) !!}
     </div>
   
     <div class="form-group">

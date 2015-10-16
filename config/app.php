@@ -139,6 +139,8 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         //'Way\Generators\GeneratorsServiceProvider',
         //'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
+        //Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
+        Netshell\Paypal\PaypalServiceProvider::class,
         
 
         /*
@@ -197,6 +199,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
+        //'Paypalpayment_old'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
+        'Paypalpayment' => Netshell\Paypal\Facades\Paypal::class,
 
     ],
 
