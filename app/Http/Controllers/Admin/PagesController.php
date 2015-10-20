@@ -81,7 +81,7 @@ class PagesController extends Controller
       \Auth::user()->pages()->save($page);
       
       return redirect('/admin/page')->with([
-        'flash_message' => 'Create new page'
+        'flash_message' => 'Created new page'
       ]);
     }
     

@@ -28,6 +28,7 @@ class PageRequest extends Request
       
         return [
             'title' => 'required',
+            'path' => 'required',
             'content' => 'required|min:5',
             //
         ];

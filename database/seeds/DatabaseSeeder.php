@@ -29,6 +29,25 @@ class DatabaseSeeder extends Seeder
          App\CatalogBasketItem::create(['basket_id' => 1, 'product_id' => 2, 'quantity' => 1]);
          App\CatalogBasketItem::create(['basket_id' => 1, 'product_id' => 3, 'quantity' => 1]);
 
+         
+         // create sample order
+         App\Payment::create([
+            'method_id' => 1,
+            'total' => 100.00,
+            'status' => 'prepared' 
+         ]);
+         App\OrderAddress::create([
+             'address_type' => 'delivery', 
+             'address_line_1' => 'FOOD FOR THOUGHT',
+             'address_line_2' => '31 Neal Street',
+             'city' => 'London',
+             'postcode' => 'WC2H 9PR',
+             'phone_number' => '07773335566'
+         ]);
+         App\CatalogOrder::create(['user_id' => 1, 'payment_id' => 1, 'delivery_address_id' => 1]);
+         App\CatalogOrderItem::create(['order_id' => 1, 'product_id' => 8, 'product_name' => 'Fiat 126p', 'product_price' => 100, 'quantity' => 1]);
+         
+         
          Eloquent::reguard();
         Model::reguard();
     }

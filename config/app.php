@@ -141,6 +141,7 @@ return [
         //'Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider',
         //Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
         Netshell\Paypal\PaypalServiceProvider::class,
+        GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
         
 
         /*

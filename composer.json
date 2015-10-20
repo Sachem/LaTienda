@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "illuminate/html": "^5.0",
-        "netshell/paypal": "dev-master"
+        "netshell/paypal": "dev-master",
+        "genealabs/laravel-caffeine": "~0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

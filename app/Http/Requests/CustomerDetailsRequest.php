@@ -24,7 +24,8 @@ class CustomerDetailsRequest extends Request
     public function rules()
     {
         return [
-            //
+          'name' => 'required',
+          'email' => 'required|email'
         ];
     }
 }

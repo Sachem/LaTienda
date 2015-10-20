@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CustomerAddressRequest extends Request
+class ContactFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class CustomerAddressRequest extends Request
     public function rules()
     {
         return [
-          'address_line_1' => 'required|min:5',
-          'city' => 'required',
-          'postcode' => 'required',
-          'phone_number' => 'required'
+          'name' => 'required',
+          'email' => 'required|email',
+          'message' => 'required|min:5'
         ];
     }
 }

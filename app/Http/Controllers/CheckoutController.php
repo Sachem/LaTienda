@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\CustomerAddressRequest;
 use App\Http\Controllers\Controller;
 
 use App\CatalogBasket;
@@ -38,7 +39,7 @@ class CheckoutController extends Controller
       return view('catalog.checkout.checkout_step_1', ['basket_total' => $basket->total_cost, 'items' => $basket->items, 'delivery_address' => $delivery_address]);
     }
     
-    public function postConfirmation(Requests\CustomerAddressRequest $request) 
+    public function postConfirmation(CustomerAddressRequest $request) 
     {
       DB::beginTransaction();
       $transaction_fail = false;

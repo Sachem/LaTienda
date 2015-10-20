@@ -1,8 +1,9 @@
 
 /*# sourceMappingURL=app.css.map */
 
-.clickable-rows tr{cursor:pointer}
-.clickable-rows tr:hover{background-color: #5dc2f1 !important}
+.alert-danger{
+    padding-left: 20px;
+}
 
 .address-display-group label{
     width: 160px;

@@ -26,8 +26,8 @@ class CatalogProductRequest extends Request
       $this->merge(['active' => $this->input('active', 0)]);
       
         return [
-            
-            //
+          'name' => 'required',
+          'price' => 'required'
         ];
     }
     

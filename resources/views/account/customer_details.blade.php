@@ -6,6 +6,7 @@
 
   <h1>Customer Details</h1>
 
+  @include('errors.validation')
 
     <h2>Your personal data</h2> 
     
@@ -69,7 +70,7 @@
     <h2>Your address</h2> 
 
       {!! Form::model($user_address, ['method' => 'POST', 'action' => ['Account\CustomerDetailsController@postUpdateAddress']]) !!}
-
+      
         @include('partials.address_form')
 
         <div class="form-group">

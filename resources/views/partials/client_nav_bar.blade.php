@@ -48,7 +48,7 @@
             <ul class="dropdown-menu">
 
               <li><a href='{{ url('account/details') }}'>Your Details</a></li>
-              <li><a href='{{ url('account/orders') }}'>Your Orders</a></li>
+              <li><a href='{{ url('account/order') }}'>Your Orders</a></li>
 
             </ul>
           </li>

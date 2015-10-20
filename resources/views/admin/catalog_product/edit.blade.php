@@ -73,8 +73,5 @@
     };
   </script>
 
-  
-  @include('errors.validation')
-  
 @stop
 

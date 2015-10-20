@@ -1,6 +1,10 @@
 
 /*# sourceMappingURL=app.css.map */
 
+.alert-danger{
+    padding-left: 20px;
+}
+
 .address-display-group label{
     width: 160px;
 }

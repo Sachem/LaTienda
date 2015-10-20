@@ -16,7 +16,5 @@
     
   {!! Form::close() !!}
   
-  @include('errors.validation')
-  
 @stop
 

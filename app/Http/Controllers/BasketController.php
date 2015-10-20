@@ -20,6 +20,15 @@ use Cookie;
 
 class BasketController extends Controller
 {
+  /**
+   * 
+   * Creates a basket and stores it in the db.
+   * If authenticated saves a basket with user_id, 
+   * otherwise uses session_token, which is a Cookie 'LatiendaBasketId'
+   * 
+   * @param CookieJar $cookie_jar
+   * @return CatalogBasket
+   */
   protected function createBasket(CookieJar $cookie_jar = null)
   {
     $basket = new CatalogBasket;
@@ -36,17 +45,27 @@ class BasketController extends Controller
     }
 
     $basket->save(); 
-    
+
     return $basket;
   }
   
+  /**
+   * 
+   * Reads basket and it's items from the db.
+   * 
+   * If user authenticated check's for items in 'unlogged' basket, and moves the items to user's basket.
+   * 
+   * @param CookieJar $cookie_jar
+   * @return type
+   */
   protected function retrieveBasket(CookieJar $cookie_jar = null)
   {
-    
     // if authorized user, find basket in DB by user_id
     if (Auth::check())
     {
       $basket = CatalogBasket::with('items.product.images')->where('user_id', Auth::user()->id)->first();
+      
+      $unlogged_basket = CatalogBasket::with('items')->where('session_token', Cookie::get('LatiendaBasketId'))->first();
     }
     elseif(Cookie::get('LatiendaBasketId')) // find by cookie
     {
@@ -59,12 +78,32 @@ class BasketController extends Controller
       $basket = $this->createBasket($cookie_jar);
     }
     
+    // if user is logged and there exists "unlogged" basket, move items from this "unlogged" basket to user's basket
+    if (isset($unlogged_basket) && ! $unlogged_basket->items->isEmpty())
+    {
+      $this->connectBaskets($basket->id, $unlogged_basket->id);
+      
+      $basket = CatalogBasket::with('items.product.images')->where('user_id', Auth::user()->id)->first();
+    }
+    
+    
     return $basket;
   }
   
-  protected function connectBaskets()
+  /**
+   * 
+   * Moves items from 'unlogged' basket to user's basket.
+   * 
+   * @param type $basket_id
+   * @param type $unlogged_basket_id
+   */
+  protected function connectBaskets($basket_id, $unlogged_basket_id)
   {
+    // update catalog_basket_items set basket_id = $basket_id where basket_id = $unlogged_basket_id
     
+    CatalogBasketItem::where('basket_id', $unlogged_basket_id)->update([
+       'basket_id' => $basket_id
+    ]);
   }
   
   
@@ -85,6 +124,9 @@ class BasketController extends Controller
 
     /**
      * [AJAX] Add product to basket
+     * 
+     * @param CookieJar $cookie_jar
+     * @return JSON Response
      */
     public function postAddItem(CookieJar $cookie_jar)
     {
@@ -145,7 +187,10 @@ class BasketController extends Controller
     }
 
     /**
+     * 
      * [AJAX] Remove product from basket
+     * 
+     * @return JSON Response
      */
     public function postRemoveItem()
     {
@@ -196,7 +241,10 @@ class BasketController extends Controller
     }
 
     /**
+     * 
      * [AJAX] Change quantity of a product in a basket
+     * 
+     * @return JSON Response
      */
     public function postChangeQuantity()
     {

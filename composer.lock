@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "235ad1365f46e7906ccd5968b926e2d2",
+    "hash": "1e79e4d8b8c543c8c56dca36f0ee6a26",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -215,6 +215,47 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "genealabs/laravel-caffeine",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/laravel-caffeine.git",
+                "reference": "da90a1f3bfa6a811fd3b47989e18e9358fbbf67f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/laravel-caffeine/zipball/da90a1f3bfa6a811fd3b47989e18e9358fbbf67f",
+                "reference": "da90a1f3bfa6a811fd3b47989e18e9358fbbf67f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^5.1",
+                "illuminate/support": "~5.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\LaravelCaffeine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "hello@genealabs.com"
+                }
+            ],
+            "description": "Keeping Your Laravel Forms Awake",
+            "time": "2015-09-02 22:56:56"
         },
         {
             "name": "illuminate/html",

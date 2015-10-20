@@ -5,6 +5,8 @@
   <a href='javascript: window.history.go(-1)'>&laquo; back</a>
 
   <h1>Checkout - Step 1/2</h1>
+  
+    @include('errors.validation')
 
     <h2>Items in your basket</h2> 
 
