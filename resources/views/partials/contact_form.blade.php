@@ -2,7 +2,7 @@
     
     @include('errors.validation')
     
-    {!! Form::open(array('action' => 'WebsiteController@contactFormSend')) !!} 
+    {!! Form::open(array('action' => 'WebsiteController@postContactForm')) !!} 
     
         <fieldset>
             <div class="form-group">

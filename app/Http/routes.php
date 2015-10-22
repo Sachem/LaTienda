@@ -12,11 +12,11 @@
 */
 
   /*
-   * Website basic routes
+   * Home Page
    */
 
     Route::get('/', 'WebsiteController@hello');
-    Route::post('contact_request', 'WebsiteController@contactFormSend');
+    //Route::post('contact_request', 'WebsiteController@contactFormSend');
 
   
   /**
@@ -26,6 +26,7 @@
     Route::controllers([
         'auth' => 'Auth\AuthController',
         'password' => 'Auth\PasswordController',
+        'website' => 'WebsiteController',
         'basket' => 'BasketController',
         'checkout' => 'CheckoutController',
         'paypal' => 'PaypalPaymentController',
@@ -37,6 +38,8 @@
 
     Route::get('product/{product}/{product_name}', 'LatiendaController@showProduct');
     Route::get('category/{category}/{category_name}', 'LatiendaController@showCategory');
+    Route::get('search', 'LatiendaController@showSearchBox');
+    Route::get('search-result', 'LatiendaController@searchResult');
 
   /**
    * Create routes for pages added in CMS 
@@ -45,7 +48,7 @@
     $pages = \App\Page::visible()->get();
     foreach ($pages as $page)
     {
-      Route::get($page->path, 'WebsiteController@cmsPage');
+      Route::get($page->path, 'WebsiteController@getCmsPage');
     }
 
   /**

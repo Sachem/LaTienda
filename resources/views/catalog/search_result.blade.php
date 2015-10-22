@@ -2,7 +2,7 @@
 
 @section('content')
   
-  <h1>Category: {{ $category->name }}</h1>
+  <h1>Search results for: {{ $keyword }}</h1>
   
   <ul>
     
@@ -10,6 +10,6 @@
     
   </ul>
   
-  @include('partials.pagination', ['paginator' => $products])
+ {!! $products->appends(['keyword' => $keyword])->render() !!}
   
 @stop

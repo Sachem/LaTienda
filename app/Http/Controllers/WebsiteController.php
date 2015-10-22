@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Requests\PageRequest;
-use App\Http\Requests\ContactFormRequest;
 use App\Http\Controllers\Controller;
+
 use App\Page;
 use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Validator as Validator;
 use Request;
 use Illuminate\Support\Facades\Mail;
+
+use App\Http\Requests\PageRequest;
+use App\Http\Requests\ContactFormRequest;
 
 
 /* 
@@ -33,7 +35,7 @@ class WebsiteController extends Controller
      * 
      * @return type
      */
-    public function cmsPage(Request $request)
+    public function getCmsPage(Request $request)
     {       
       $page = Page::where('path', $request::path())->first();
  
@@ -45,7 +47,7 @@ class WebsiteController extends Controller
       ]);
     }
     
-    public function contactFormSend(ContactFormRequest $request)         
+    public function postContactForm(ContactFormRequest $request)         
     { 
       $data = $request->all();
       Mail::send('emails.feedback', ['data' => $data], function($message) use ($data)
@@ -58,4 +60,5 @@ class WebsiteController extends Controller
         'flash_message' => 'Your message has been sent. Thank You!'
       ]);
     }
+    
 }

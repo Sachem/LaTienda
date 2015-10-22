@@ -20,13 +20,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="{{ url('/basket') }}">Basket</a></li>
+        <li class="{{ Request::path() == 'basket' ? 'active' : '' }}"><a href="{{ url('/basket') }}">Basket</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
     
             @foreach ($categories as $category)
-            <li><a href='{{ url('category/'.$category->id.'/'.str_slug($category->name)) }}'>{{ $category->name }}</a></li>
+            <li class="{{ Request::path() == 'category/'.$category->id.'/'.str_slug($category->name) ? 'active' : '' }}">
+                <a href='{{ url('category/'.$category->id.'/'.str_slug($category->name)) }}'>{{ $category->name }}</a>
+            </li>
             @endforeach
             
           </ul>
@@ -36,7 +38,7 @@
         
           @foreach ($pages as $page)
             
-            <li><a href="{{ url($page->path) }}">{{ $page->title }}</a></li>
+            <li class="{{ Request::path() == $page->path ? 'active' : '' }}"><a href="{{ url($page->path) }}">{{ $page->title }}</a></li>
             
           @endforeach
           
@@ -47,8 +49,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Panel <span class="caret"></span></a>
             <ul class="dropdown-menu">
 
-              <li><a href='{{ url('account/details') }}'>Your Details</a></li>
-              <li><a href='{{ url('account/order') }}'>Your Orders</a></li>
+              <li class="{{ Request::path() == 'account/details' ? 'active' : '' }}"><a href='{{ url('account/details') }}'>Your Details</a></li>
+              <li class="{{ Request::path() == 'account/order' ? 'active' : '' }}"><a href='{{ url('account/order') }}'>Your Orders</a></li>
 
             </ul>
           </li>
